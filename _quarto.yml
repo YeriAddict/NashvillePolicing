@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "Nashville Policing"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - Joanne Nie (jcn2148)
+    - Denis Leang (dsl2179)
+  repo-url: https://github.com/YeriAddict/NashvillePolicing.git
   date: today
   page-footer:
     right: |
