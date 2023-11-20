@@ -1,1 +1,5 @@
 # Introduction
+
+Most drivers in America are familiar with the situation of getting pulled over while on the road. The reasons can be anything from speeding to a having a broken tail light, which are obvious examples of law-breaking. However, one might wonder if there is more to the story. For this project, we use data from policing records in Nashville provided by the Stanford Computational Journalism Lab, the Knight Foundation, and the Stanford Computational Policy Lab.
+
+We are interested in how different features of the traffic stop are related to one another, including its temporal aspect, its geographic location, and the demographic data of the driver. It may be interesting to see if more people are stopped during a certain time of day (such as rush hour) or at a busy location (such as a large intersection). Maybe there is a distinction between the brand of car driven or the age of the vehicle. Additionally, there are certain stereotypes about race and driving that may also be evident. Are Asians really the worst drivers? Are male drivers more reckless? These are among the questions that we plan to investigate through exploration of our data.
