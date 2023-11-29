@@ -2,4 +2,53 @@
 
 ## Description
 
+| Column | Type | Description | Example |
+|------|------|------|------|
+| raw_row_number | numeric | Row number used to join clean data back to raw data | 3092350 |
+| date | string | Date in "YYYY-MM-DD" format | 2016-09-09 |
+| time | string | Time in "HH:MM:SS" format | 21:57:00 |
+| location | string | Address in "Street, City, State, Zipcode" | I 40 W & CHARLOTTE AVE, NASHVILLE, TN, 37203 |
+| lat | numeric | Latitude | 36.063321 |
+| lng | numeric | Longitude | -86.637409 |
+| precinct | numeric | Police precinct | 2.0 |
+| reporting_area | Police reporting area | 1863.0 |
+| zone | numeric | Police zone | 223.0 |
+| subject_age | numeric | Age of the stopped subject | 18.0 |
+| subject_race | string | Race of the stopped subject | hispanic |
+| subject_sex | string | Sex of the stopped subject | female |
+| officer_id_hash | string | Unique officer ID hash | e7099bc91c |
+| type | Type of stop: vehicular or pedestrian | vehicular |
+| violation | string | Specific violation of stop | vehicle equipment violation | 
+| arrest_made | bool | Indicates whether an arrest was made | False |
+| citation_issued | bool | Indicates whether a citation was issued | False |
+| warning_issued | bool | Indicates whether a warning was issued | False |
+| outcome | string | Indicates whether one of these actions have been taken (arrest, citation, warning and summons) | citation
+| contraband_found | bool | Indicates whether a contraband was found | False |
+| contraband_drugs | bool | Indicates whether drugs were found | False |
+| contraband_weapons | bool | Indicates whether weapons were found | False |
+| frisk_performed | bool | Indicates whether a frisk was performed | False |
+| search_conducted | bool | Indicates whether a search was conducted | False |
+| search_person | bool | Indicates whether a person was searched | False |
+| search_vehicle | bool | Indicates whether a vehicle was searched | False |
+| search_basis | string | Provides the reason for the search (k9, consent, plain view, probable cause, other) | consent |
+| reason_for_stop | string | Provides the reason for the stop | moving traffic violation |
+| vehicle_registration_state | string | Vehicle state origin (ex: TN for Tennessee) | TN |
+| notes | string | Contains officer notes | CITED FOR NOT HAVING INSURANCE |
+| raw_verbal_warning_issued | bool | Indicates whether a verbal warning was issued | False |
+| raw_written_warning_issued | bool | Indicates whether a written warning was issued | False |
+| raw_traffic_citation_issued | bool | Indicates whether a traffic citation was issued | False |
+| raw_misd_state_citation_issued | bool | Indicates whether a misd state citation was issued | False |
+| raw_suspect_ethnicity | string | Ethnicity of the suspect | H |
+| raw_driver_searched | bool | Indicates whether a driver was searched | False |
+| raw_passenger_searched | bool | Indicates whether a passenger was searched | False |
+| raw_search_consent | bool | Indicates whether a search was consent | False |
+| raw_search_arrest | bool | Indicates whether a search was due to an arrest | False |
+| raw_search_warrant | bool | Indicates whether a search warrant was issued | False |
+| raw_search_inventory | bool | Indicates whether an inventory search | False |
+| raw_search_plain_view | bool | Indicates whether evidence was seized without a warrant | False |
+
+: Columns description {#tbl-letters}
+
+See @tbl-letters.
+
 ## Missing value analysis
