@@ -27,13 +27,13 @@ The table below provides a description of all columns, including their type and 
 | lat | numeric | Latitude | 36.063321 |
 | lng | numeric | Longitude | -86.637409 |
 | precinct | numeric | Police precinct | 2.0 |
-| reporting_area | Police reporting area | 1863.0 |
+| reporting_area | numeric | Police reporting area | 1863.0 |
 | zone | numeric | Police zone | 223.0 |
 | subject_age | numeric | Age of the stopped subject | 18.0 |
 | subject_race | string | Race of the stopped subject | hispanic |
 | subject_sex | string | Sex of the stopped subject | female |
 | officer_id_hash | string | Unique officer ID hash | e7099bc91c |
-| type | Type of stop: vehicular or pedestrian | vehicular |
+| type | string | Type of stop: vehicular or pedestrian | vehicular |
 | violation | string | Specific violation of stop | vehicle equipment violation | 
 | arrest_made | bool | Indicates whether an arrest was made | False |
 | citation_issued | bool | Indicates whether a citation was issued | False |
