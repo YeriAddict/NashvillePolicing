@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -141,8 +175,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="header-section-number">2.1</span> Description</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</a></li>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link active" data-scroll-target="#technical-description"><span class="header-section-number">2.1</span> Technical Description</a></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">2.2</span> Research Plan</a></li>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -166,11 +201,361 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="description" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
+<section id="technical-description" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical Description</h2>
+<p>The data we are interested in originates from The Stanford Open Policing Project found <a href="https://openpolicing.stanford.edu/data/">here</a>. This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. The project is lead by a group of researchers and journalists at Stanford University and the data is requested from law enforcement agencies. Each city possesses its own CSV/Rdata file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">README</a> provides an exhaustive overview of the data. Each row in the dataset represents a stop that occurred in a particular city.</p>
+<p>We have decided to choose the dataset for Nashville (Tennessee) because it has the most comprehensive features among all of the cities while also having a significant number of stops. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.</p>
+<p>The initial dataset has:</p>
+<ul>
+<li>Rows: 3092351</li>
+<li>Columns: 42</li>
+<li>Data timeframe: 2010 to 2019</li>
+<li>File size: 100 MB</li>
+<li>File type: rds file</li>
+</ul>
+<p>The table below provides a description of all columns, including their type and meaning, accompanied by an example:</p>
+<div id="tbl-letters" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2.1: Columns description for Nashville (TN)</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>raw_row_number</td>
+<td>numeric</td>
+<td>Row number used to join clean data back to raw data</td>
+<td>3092350</td>
+</tr>
+<tr class="even">
+<td>date</td>
+<td>string</td>
+<td>Date in “YYYY-MM-DD” format</td>
+<td>2016-09-09</td>
+</tr>
+<tr class="odd">
+<td>time</td>
+<td>string</td>
+<td>Time in “HH:MM:SS” format</td>
+<td>21:57:00</td>
+</tr>
+<tr class="even">
+<td>location</td>
+<td>string</td>
+<td>Address in “Street, City, State, Zipcode”</td>
+<td>I 40 W &amp; CHARLOTTE AVE, NASHVILLE, TN, 37203</td>
+</tr>
+<tr class="odd">
+<td>lat</td>
+<td>numeric</td>
+<td>Latitude</td>
+<td>36.063321</td>
+</tr>
+<tr class="even">
+<td>lng</td>
+<td>numeric</td>
+<td>Longitude</td>
+<td>-86.637409</td>
+</tr>
+<tr class="odd">
+<td>precinct</td>
+<td>numeric</td>
+<td>Police precinct</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<td>reporting_area</td>
+<td>Police reporting area</td>
+<td>1863.0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>zone</td>
+<td>numeric</td>
+<td>Police zone</td>
+<td>223.0</td>
+</tr>
+<tr class="even">
+<td>subject_age</td>
+<td>numeric</td>
+<td>Age of the stopped subject</td>
+<td>18.0</td>
+</tr>
+<tr class="odd">
+<td>subject_race</td>
+<td>string</td>
+<td>Race of the stopped subject</td>
+<td>hispanic</td>
+</tr>
+<tr class="even">
+<td>subject_sex</td>
+<td>string</td>
+<td>Sex of the stopped subject</td>
+<td>female</td>
+</tr>
+<tr class="odd">
+<td>officer_id_hash</td>
+<td>string</td>
+<td>Unique officer ID hash</td>
+<td>e7099bc91c</td>
+</tr>
+<tr class="even">
+<td>type</td>
+<td>Type of stop: vehicular or pedestrian</td>
+<td>vehicular</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>violation</td>
+<td>string</td>
+<td>Specific violation of stop</td>
+<td>vehicle equipment violation</td>
+</tr>
+<tr class="even">
+<td>arrest_made</td>
+<td>bool</td>
+<td>Indicates whether an arrest was made</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>citation_issued</td>
+<td>bool</td>
+<td>Indicates whether a citation was issued</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>warning_issued</td>
+<td>bool</td>
+<td>Indicates whether a warning was issued</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>outcome</td>
+<td>string</td>
+<td>Indicates whether one of these actions have been taken (arrest, citation, warning and summons)</td>
+<td>citation</td>
+</tr>
+<tr class="even">
+<td>contraband_found</td>
+<td>bool</td>
+<td>Indicates whether a contraband was found</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>contraband_drugs</td>
+<td>bool</td>
+<td>Indicates whether drugs were found</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>contraband_weapons</td>
+<td>bool</td>
+<td>Indicates whether weapons were found</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>frisk_performed</td>
+<td>bool</td>
+<td>Indicates whether a frisk was performed</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>search_conducted</td>
+<td>bool</td>
+<td>Indicates whether a search was conducted</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>search_person</td>
+<td>bool</td>
+<td>Indicates whether a person was searched</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>search_vehicle</td>
+<td>bool</td>
+<td>Indicates whether a vehicle was searched</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>search_basis</td>
+<td>string</td>
+<td>Provides the reason for the search (k9, consent, plain view, probable cause, other)</td>
+<td>consent</td>
+</tr>
+<tr class="even">
+<td>reason_for_stop</td>
+<td>string</td>
+<td>Provides the reason for the stop</td>
+<td>moving traffic violation</td>
+</tr>
+<tr class="odd">
+<td>vehicle_registration_state</td>
+<td>string</td>
+<td>Vehicle state origin (ex: TN for Tennessee)</td>
+<td>TN</td>
+</tr>
+<tr class="even">
+<td>notes</td>
+<td>string</td>
+<td>Contains officer notes</td>
+<td>CITED FOR NOT HAVING INSURANCE</td>
+</tr>
+<tr class="odd">
+<td>raw_verbal_warning_issued</td>
+<td>bool</td>
+<td>Indicates whether a verbal warning was issued</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>raw_written_warning_issued</td>
+<td>bool</td>
+<td>Indicates whether a written warning was issued</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>raw_traffic_citation_issued</td>
+<td>bool</td>
+<td>Indicates whether a traffic citation was issued</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>raw_misd_state_citation_issued</td>
+<td>bool</td>
+<td>Indicates whether a misd state citation was issued</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>raw_suspect_ethnicity</td>
+<td>string</td>
+<td>Ethnicity of the suspect</td>
+<td>H</td>
+</tr>
+<tr class="even">
+<td>raw_driver_searched</td>
+<td>bool</td>
+<td>Indicates whether a driver was searched</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>raw_passenger_searched</td>
+<td>bool</td>
+<td>Indicates whether a passenger was searched</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>raw_search_consent</td>
+<td>bool</td>
+<td>Indicates whether a search was consent</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>raw_search_arrest</td>
+<td>bool</td>
+<td>Indicates whether a search was due to an arrest</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>raw_search_warrant</td>
+<td>bool</td>
+<td>Indicates whether a search warrant was issued</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td>raw_search_inventory</td>
+<td>bool</td>
+<td>Indicates whether an inventory search</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td>raw_search_plain_view</td>
+<td>bool</td>
+<td>Indicates whether evidence was seized without a warrant</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See <a href="#tbl-letters">Table&nbsp;<span>2.1</span></a>.</p>
+<p>The data file has been downloaded locally and is available inside the repository as it is not too large. However, we noticed some patterns with missing values that we will touch on later. Combined with the fact that there are over three million rows spanning almost a decade, we decided to subset the data for ease of analysis and computation speed. Our subsetted data includes only data from 2012-2016.</p>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</h2>
+<section id="research-plan" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research Plan</h2>
+<p>Studying trends in Nashville traffic stops provides insights into the bigger picture of law enforcement and social dynamics. One can consider any of the many factors that contribute to why someone is stopped to understand policing strategy more. The type of car someone drives may be more scrutinized by an officer, and this may differ according to time of day or day of wekk. Analyzing the intersection of race, gender, and age among those stopped can shed light on potential underlying biases in policing. Through our dive on the policing patterns in Nashville, we hope to tell a more transparent story of the law enforcement system.</p>
+<p>We plan to touch on several research areas using our data:</p>
+<ul>
+<li>To what extent do spatiotemporal factors play a part in traffic stops? This includes features like geographic location and time of day.</li>
+<li>What are the demographic patterns of those stopped? Are those of a certain gender, age, or race overrepresented in their number of traffic stops?</li>
+<li>What do the outcomes of traffic stops look like? To answer this we will look at if the suspect was searched, if a ticket was issued, etc.</li>
+<li>Are there patterns in the types of cars that are stopped?</li>
+</ul>
+</section>
+<section id="missing-value-analysis" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>nashville <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">'Datasets/yg821jf8611_tn_nashville_2020_04_01.rds'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>na_rate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Variable"</span> <span class="ot">=</span> <span class="fu">colnames</span>(nashville), </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"na_prop"</span> <span class="ot">=</span> <span class="fu">sapply</span>(nashville, <span class="cf">function</span>(y) <span class="fu">sum</span>(<span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">is.na</span>(y))))) <span class="sc">/</span> <span class="fu">nrow</span>(nashville)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(na_prop)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>na_rate <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="fu">factor</span>(Variable, <span class="at">levels =</span> na_rate<span class="sc">$</span>Variable)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Variable, <span class="at">y =</span> na_prop)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Proportion of NA's "</span>) <span class="sc">+</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Proportion of NA Values by Variable"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The majority of features have very few or zero missing values. We see that there are four columns (search_basis, contraband_weapons, contraband_found, notes) with a very high percentage of missing values (&gt;75%). This is likely due to officers not taking records in these columns, so we will not consider these features in our analysis moving forward.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nashville <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, raw_misd_state_citation_issued, raw_written_warning_issued, zone,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         precinct, reporting_area, lat, lng) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_each</span>(<span class="fu">list</span>(<span class="at">na_count =</span> <span class="sc">~</span><span class="fu">mean</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>year) <span class="sc">|&gt;</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">sub</span>(<span class="st">"_na_count$"</span>, <span class="st">""</span>, name)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> name, <span class="at">y =</span> value, <span class="at">fill =</span> name)) <span class="sc">+</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Proportion of NA's"</span>, <span class="at">x =</span> <span class="st">"Variable"</span>) <span class="sc">+</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Proportion of NA's Faceted by Year"</span>)<span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'0'</span>, <span class="st">'0.5'</span>, <span class="st">'1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To further analyze trends in missing values, I faceted the percent of missing values by year for a few of the variables with a medium number of missing values. We see that in 2017-2019, there is no data for raw_written_warning_issued, and from 2010-2011 the column raw_misd_state_citation_issued is mostly empty.</p>
+<p>Since the years 2012-2016 have the cleanest data in general, we decided to subset these years for our research going forward.</p>
 
 
 </section>
