@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="technical-description" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical Description</h2>
-<p>The data we are interested in originates from The Stanford Open Policing Project found <a href="https://openpolicing.stanford.edu/data/">here</a>. This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. The project is lead by a group of researchers and journalists at Stanford University and the data is requested from law enforcement agencies. Each city possesses its own CSV/Rdata file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">README</a> provides an exhaustive overview of the data. Each row in the dataset represents a stop that occurred in a particular city.</p>
+<p>The data we are interested in originates from The Stanford Open Policing Project found <a href="https://openpolicing.stanford.edu/data/">here</a>. This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. The project is lead by a group of researchers and journalists at Stanford University and the data is requested from law enforcement agencies. Each city possesses its own CSV/R data file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">README</a> provides an exhaustive overview of the data. Each row in the dataset represents a stop that occurred in a particular city.</p>
 <p>We have decided to choose the dataset for Nashville (Tennessee) because it has the most comprehensive features among all of the cities while also having a significant number of stops. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.</p>
 <p>The initial dataset has:</p>
 <ul>
@@ -526,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The majority of features have very few or zero missing values. We see that there are four columns (search_basis, contraband_weapons, contraband_found, notes) with a very high percentage of missing values (&gt;75%). This is likely due to officers not taking records in these columns, so we will not consider these features in our analysis moving forward.</p>
+<p>The majority of features have very few or zero missing values. We see that there are four columns (search_basis, contraband_weapons, contraband_found, notes) with a very high percentage of missing values (&gt;75%). This is likely due to officers not taking records in these columns, so we will not consider these four features in our analysis moving forward.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -554,8 +554,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>To further analyze trends in missing values, I faceted the percent of missing values by year for a few of the variables with a medium number of missing values. We see that in 2017-2019, there is no data for raw_written_warning_issued, and from 2010-2011 the column raw_misd_state_citation_issued is mostly empty.</p>
-<p>Since the years 2012-2016 have the cleanest data in general, we decided to subset these years for our research going forward.</p>
+<p>To further analyze trends in missing values, we faceted the percent of missing values by year for a few of the variables with a most number of missing values after excluding the four variables discussed above. We see that in 2017-2019, there is no data for raw_written_warning_issued, and from 2010-2011 the column raw_misd_state_citation_issued is mostly empty. This may be due to changes in notation over time.</p>
+<p>With the fact that there are over three million rows in mind, we decide to subset our data to a more manageable size. Since the years 2012-2016 have the cleanest data in general, we decided to subset these years for our research going forward. Our subsetted data has 1924464 rows.</p>
 
 
 </section>
