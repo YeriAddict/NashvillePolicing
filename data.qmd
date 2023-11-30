@@ -1,6 +1,22 @@
 # Data
 
-## Description
+## Technical Description
+
+The data we are interested in originates from The Stanford Open Policing Project found [here](https://openpolicing.stanford.edu/data/). This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. It is lead by a group of researchers and journalists at Stanford University and they gather records from law enforcement agencies.
+Each city possesses its own CSV file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this [README](https://github.com/stanford-policylab/opp/blob/master/data_readme.md) provides an exhaustive overview of the data.
+Each row in the datasets represents a stop that occured in a particular city.
+
+We have decided to choose the dataset for Nashville (Tennessee) because it has the largest number of columns amongst all the datasets while having a significant number of stops at the same time. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.
+
+The initial dataset has:
+
+- Rows: 3092351
+- Columns: 42
+- Data timeframe: 2010 to 2019
+- File size: 100 MB
+- File type: rds file
+
+The table below provides a description of all columns, including their type and meaning, accompanied by an example:
 
 | Column | Type | Description | Example |
 |------|------|------|------|
@@ -47,9 +63,12 @@
 | raw_search_inventory | bool | Indicates whether an inventory search | False |
 | raw_search_plain_view | bool | Indicates whether evidence was seized without a warrant | False |
 
-: Columns description {#tbl-letters}
+: Columns description for Nashville (TN) {#tbl-letters}
 
 See @tbl-letters.
+
+The data file has been downloaded locally and is available inside the repository as it is not too heavy. Furthermore, there are some noticeable patterns regarding N/A values that we should deal with by subsetting our data.
+For instance, some columns sometimes have a vast majority of those values. Also, we noticed that the last year (2019) was not complete and only has 14235 stops. These are issues that need to be taken care of.
 
 ## Missing value analysis
 

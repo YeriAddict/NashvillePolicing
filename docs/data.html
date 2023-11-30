@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="header-section-number">2.1</span> Description</a></li>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link active" data-scroll-target="#technical-description"><span class="header-section-number">2.1</span> Technical Description</a></li>
   <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -200,11 +200,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="description" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
+<section id="technical-description" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical Description</h2>
+<p>The data we are interested in originates from The Stanford Open Policing Project found <a href="https://openpolicing.stanford.edu/data/">here</a>. This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. It is lead by a group of researchers and journalists at Stanford University and they gather records from law enforcement agencies. Each city possesses its own CSV file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">README</a> provides an exhaustive overview of the data. Each row in the datasets represents a stop that occured in a particular city.</p>
+<p>We have decided to choose the dataset for Nashville (Tennessee) because it has the largest number of columns amongst all the datasets while having a significant number of stops at the same time. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.</p>
+<p>The initial dataset has:</p>
+<ul>
+<li>Rows: 3092351</li>
+<li>Columns: 42</li>
+<li>Data timeframe: 2010 to 2019</li>
+<li>File size: 100 MB</li>
+<li>File type: rds file</li>
+</ul>
+<p>The table below provides a description of all columns, including their type and meaning, accompanied by an example:</p>
 <div id="tbl-letters" class="anchored">
 <table class="table">
-<caption>Table&nbsp;2.1: Columns description</caption>
+<caption>Table&nbsp;2.1: Columns description for Nashville (TN)</caption>
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -476,6 +487,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 <p>See <a href="#tbl-letters">Table&nbsp;<span>2.1</span></a>.</p>
+<p>The data file has been downloaded locally and is available inside the repository as it is not too heavy. Furthermore, there are some noticeable patterns regarding N/A values that we should deal with by subsetting our data. For instance, some columns sometimes have a vast majority of those values. Also, we noticed that the last year (2019) was not complete and only has 14235 stops. These are issues that need to be taken care of.</p>
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</h2>
