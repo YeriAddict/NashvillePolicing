@@ -2,11 +2,11 @@
 
 ## Technical Description
 
-The data we are interested in originates from The Stanford Open Policing Project found [here](https://openpolicing.stanford.edu/data/). This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. It is lead by a group of researchers and journalists at Stanford University and they gather records from law enforcement agencies.
-Each city possesses its own CSV file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this [README](https://github.com/stanford-policylab/opp/blob/master/data_readme.md) provides an exhaustive overview of the data.
-Each row in the datasets represents a stop that occured in a particular city.
+The data we are interested in originates from The Stanford Open Policing Project found [here](https://openpolicing.stanford.edu/data/). This project aims to compile diverse information concerning police stops and crimes across multiple cities in the USA. The project is lead by a group of researchers and journalists at Stanford University and the data is requested from law enforcement agencies.
+Each city possesses its own CSV/Rdata file with distinct data columns, as policies may vary due to differing state or city laws. For a comprehensive description of the various column types within the datasets, this [README](https://github.com/stanford-policylab/opp/blob/master/data_readme.md) provides an exhaustive overview of the data.
+Each row in the dataset represents a stop that occurred in a particular city.
 
-We have decided to choose the dataset for Nashville (Tennessee) because it has the largest number of columns amongst all the datasets while having a significant number of stops at the same time. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.
+We have decided to choose the dataset for Nashville (Tennessee) because it has the most comprehensive features among all of the cities while also having a significant number of stops. This will give us more flexibility for a deeper analysis and to provide well-thought-out answers to our questions.
 
 The initial dataset has:
 
@@ -67,8 +67,19 @@ The table below provides a description of all columns, including their type and 
 
 See @tbl-letters.
 
-The data file has been downloaded locally and is available inside the repository as it is not too heavy. Furthermore, there are some noticeable patterns regarding N/A values that we should deal with by subsetting our data.
-For instance, some columns sometimes have a vast majority of those values. Also, we noticed that the last year (2019) was not complete and only has 14235 stops. These are issues that need to be taken care of.
+The data file has been downloaded locally and is available inside the repository as it is not too large. However, we noticed some patterns with missing values that we will touch on later. Combined with the fact that there are over three million rows spanning almost a decade, we decided to subset the data for ease of analysis and computation speed. Our subsetted data includes only data from 2012-2016.
+
+## Research Plan
+
+Studying trends in Nashville traffic stops provides insights into the bigger picture of law enforcement and social dynamics. One can consider any of the many factors that contribute to why someone is stopped to understand policing strategy more. The type of car someone drives may be more scrutinized by an officer, and this may differ according to time of day or day of wekk. Analyzing the intersection of race, gender, and age among those stopped can shed light on potential underlying biases in policing. Through our dive on the policing patterns in Nashville, we hope to tell a more transparent story of the law enforcement system.
+
+We plan to touch on several research areas using our data:
+
+* To what extent do spatiotemporal factors play a part in traffic stops? This includes features like geographic location and time of day.
+* What are the demographic patterns of those stopped? Are those of a certain gender, age, or race overrepresented in their number of traffic stops?
+* What do the outcomes of traffic stops look like? To answer this we will look at if the suspect was searched, if a ticket was issued, etc.
+* Are there patterns in the types of cars that are stopped?
+
 
 ## Missing value analysis
 
@@ -90,6 +101,8 @@ na_rate |>
   labs(y = "Proportion of NA's ") + 
   ggtitle("Proportion of NA Values by Variable")
 ```
+
+The majority of features have very few or zero missing values. We see that there are four columns (search_basis, contraband_weapons, contraband_found, notes) with a very high percentage of missing values (>75%). This is likely due to officers not taking records in these columns, so we will not consider these features in our analysis moving forward. 
 
 ```{r, warning = FALSE, message = FALSE}
 nashville |> 
@@ -113,4 +126,7 @@ nashville |>
     labels = c('0', '0.5', '1'))
 ```
 
+To further analyze trends in missing values, I faceted the percent of missing values by year for a few of the variables with a medium number of missing values. We see that in 2017-2019, there is no data for raw_written_warning_issued, and from 2010-2011 the column raw_misd_state_citation_issued is mostly empty. 
+
+Since the years 2012-2016 have the cleanest data in general, we decided to subset these years for our research going forward.
 
