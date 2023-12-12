@@ -1,1 +1,252 @@
 # Results
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(lubridate)
+library(GGally)
+library(vcd)
+library(gridExtra)
+library(ggalluvial)
+
+load('Datasets/nashville_2014.RData')
+
+nashville <- nashville_2014 |> 
+  select(-c(search_basis, contraband_weapons, contraband_found, notes))
+```
+
+## Temporal Aspects
+
+The first step of our exploratory data analysis involves seeing how the number of traffic stops evolved throughout 2014. Since traffic, and therefore driving habits, varies heavily by seasonal factors as well as daily habits, we plot a line graph segmented by day of the week. We see that there are clearly fewer traffic stops occurring on the weekend, which is likely due to the lack of rush hour traffic and its associated stress. There are three outliers to this trend, indicated by the very few traffic stops occuring on Thanksgiving, Christmas Eve, and Christmas Day.
+
+```{r, warning = FALSE, message = FALSE}
+nashville |> 
+  mutate(Day = wday(date, label = TRUE)) |> 
+  group_by(date, Day) |> 
+  summarise(count = n()) |> 
+  ggplot(aes(x = date, y = count, color = Day)) + 
+  geom_point(size = 0.5) +
+  geom_line() +
+  theme_bw(13) +
+  labs(x = "Date", y = "Stop Count") +
+  ggtitle("Stop Count by Day of Week")
+```
+
+For completeness we also included the breakdown by hour of day, which verifies our intuition that there are fewer stops during the early morning hours and a spike in during rush hours from 9-10AM and 4-5PM.
+
+```{r, warning = FALSE, message = FALSE}
+nashville |> 
+  mutate(Day = wday(date, label = TRUE),
+         Hour = hour(time)) |> 
+  group_by(Day, Hour) |> 
+  summarise(count = n()) |> 
+  ggplot(aes(x = Hour, y = count, color = Day)) + 
+  geom_point(size = 0.5) +
+  geom_line() +
+  theme_bw(13) +
+  scale_x_discrete(limits=0:23) + 
+  labs(x = "Hour", y = "Stop Count") +
+  ggtitle("Stop Count by Hour of the Day") 
+```
+
+
+## Demographic Data
+
+```{r}
+nashville |> 
+  select(violation, subject_sex) |> 
+  drop_na() |> 
+  ggplot(aes(y = violation, fill = subject_sex)) + 
+  geom_bar(position='fill') + 
+  labs(x = "Violation", y = "Proportion") + 
+  ggtitle("Violation Comparison Between Genders") + 
+  scale_fill_manual(values = c("#82A2CA", "pink2"),
+                    name = "Gender") + 
+  theme_bw(13) +
+  geom_vline(xintercept = .412)+
+  scale_x_continuous(breaks = c(0, 0.25, 0.41, 0.5, 0.75, 1), 
+                     labels = c(0, 0.25, 0.41, 0.5, 0.75, 1))
+```
+
+```{r}
+p1 <- nashville |> 
+  select(arrest_made, subject_age) |> 
+  rename("Age" = subject_age) |> 
+  drop_na() |> 
+  ggplot(aes(y = arrest_made, x = Age, color = arrest_made)) +
+  geom_boxplot() + 
+  labs(y = "Arrest Made") +
+  theme_bw() + 
+  theme(legend.position="none") 
+
+p2 <- nashville |> 
+  select(warning_issued, subject_age) |> 
+  rename("Age" = subject_age) |> 
+  drop_na() |> 
+  ggplot(aes(y = warning_issued, x = Age, color = warning_issued)) +
+  geom_boxplot() + 
+  labs(y = "Warning Issued") +
+  theme_bw() + 
+  theme(legend.position="none") 
+
+p3 <- nashville |> 
+  select(search_vehicle, subject_age) |> 
+  rename("Age" = subject_age) |> 
+  drop_na() |> 
+  ggplot(aes(y = search_vehicle, x = Age, color = search_vehicle)) +
+  geom_boxplot() + 
+  labs(y = "Search Vehicle") +
+  theme_bw() + 
+  theme(legend.position="none") 
+
+p4 <- nashville |> 
+  select(search_person, subject_age) |> 
+  rename("Age" = subject_age) |> 
+  drop_na() |> 
+  ggplot(aes(y = search_person, x = Age, color = search_person)) +
+  geom_boxplot() + 
+  labs(y = "Search Person") +
+  theme_bw() + 
+  theme(legend.position="none") 
+
+grid.arrange(p1, p2, p3, p4, top = "Distribution of Age Across Outcomes")
+``` 
+
+```{r, warning = FALSE, message = FALSE}
+nashville |> 
+  select(subject_race, subject_sex, arrest_made, citation_issued, 
+         warning_issued, frisk_performed, search_conducted, 
+         search_person, search_vehicle) |> 
+  drop_na() |> 
+  group_by(subject_race, subject_sex) |> 
+  summarise(arrest_made = mean(arrest_made),
+            citation_issued = mean(citation_issued),
+            warning_issued = mean(warning_issued),
+            frisk_performed = mean(frisk_performed),
+            search_conducted = mean(search_conducted),
+            search_person = mean(search_person),
+            search_vehicle = mean(search_vehicle)) |> 
+  mutate(Group = paste(subject_race, subject_sex, sep = "_")) |> 
+  ggparcoord(columns = 3:9, groupColumn = "Group") +
+  scale_color_manual(values = c(
+    "#a6cee3", "#164e74",
+    "#b2df8a", "#2a7e1b",
+    "#ababab", "#000000",
+    "#ffc07d", "#ff6600",
+    "#cab2d6", "#583380",
+    "#ff99ff", "#ff44ff")) +
+  theme_bw(13) + 
+  ggtitle("Stop Outcomes by Race and Gender") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+```{r, warning = FALSE, message = FALSE}
+mosaic_data <- nashville |> 
+  mutate(subject_race = ifelse(subject_race %in% 
+        c("asian/pacific islander", "unknown", "other", "hispanic"), "other", 
+        as.character(subject_race))) |> 
+  mutate(Age = case_when(subject_age < 25 ~ "<25",
+                         subject_age < 35 ~ "25-34",
+                         subject_age < 45 ~ "35-44",
+                         TRUE ~ "45+")) |> 
+  rename("Gender" = "subject_sex",
+         "Race" = "subject_race") 
+
+all_xtabs <- mosaic_data |> 
+  xtabs(formula = ~ search_person + Gender + Age + Race)
+
+male_xtabs <- mosaic_data |> 
+  filter(Gender == "male") |> 
+  xtabs(formula = ~ search_person + Age + Race)
+
+female_xtabs <- mosaic_data |> 
+  filter(Gender == "female") |> 
+  xtabs(formula = ~ search_person + Age + Race)
+
+mosaic(search_person ~ Age + Race, male_xtabs, 
+       direction = c("v", "v", "h"),
+       rot_labels = c(0, 0, 45, 90),
+       main = "Search Person: Males")
+
+mosaic(search_person ~ Age + Race, female_xtabs, 
+       direction = c("v", "v", "h"),
+       rot_labels = c(0, 0, 45, 90),
+       main = "Search Person: Females")
+
+```
+
+## Geographic Elements
+
+```{r, warning = FALSE, message = FALSE}
+nashville |> 
+  filter(precinct %in% as.character(1:8)) |> 
+  select(precinct, reason_for_stop) |> 
+  rename("Reason for Stop" = reason_for_stop) |> 
+  drop_na() |> 
+  ggplot(aes(x = precinct, fill = `Reason for Stop`)) + 
+  geom_bar(position='fill') + 
+  labs(x = "Precinct", y = "Proportion") + 
+  ggtitle("Reasons for Stop Across Precincts") + 
+  scale_fill_manual(values = c("#66c2a5", "#fc8d62", "#82A2CA", "#f99aa4", 
+                               "#ffd920", "#aec57b", "#e19c5a", "#ad8db3"),
+                    name = "Reason for Stop") + 
+  theme_bw(13)
+```
+
+```{r, warning = FALSE, message = FALSE}
+nashville |>
+  filter(precinct %in% as.character(1:8)) |> 
+  mutate(Hour = hour(time)) |> 
+  group_by(Hour, precinct) |> 
+  summarise(count = n()) |> 
+  ggplot(aes(x = Hour, y = count, color = precinct)) + 
+  geom_point(size = 0.5) +
+  geom_line() +
+  theme_bw(13) +
+  scale_x_discrete(limits=0:23) + 
+  labs(x = "Hour", y = "Stop Count") +
+  ggtitle("Stop Count by Hour of the Day") 
+```
+
+
+```{r}
+nashville |> 
+  filter(precinct %in% as.character(1:8)) |> 
+   mutate(subject_race = ifelse(subject_race %in% 
+        c("asian/pacific islander", "unknown", "other", "hispanic"), "other", 
+        as.character(subject_race))) |> 
+  select(precinct, subject_race) |> 
+  drop_na() |> 
+  ggplot(aes(x = precinct, fill = subject_race)) + 
+  geom_bar(position='fill') + 
+  labs(x = "Precinct", y = "Proportion") + 
+  ggtitle("Reasons for Stop Across Precincts") + 
+  scale_fill_manual(values = c("#aec57b", "#ad8db3", "#82A2CA"),
+                    name = "Reason for Stop") + 
+  theme_bw(13)
+```
+
+```{r, warning = FALSE, message = FALSE}
+nashville |> 
+  filter(precinct %in% as.character(1:8)) |> 
+  select(precinct, arrest_made, citation_issued, 
+         warning_issued, frisk_performed, search_conducted, 
+         search_person, search_vehicle) |> 
+  drop_na() |> 
+  group_by(precinct) |> 
+  summarise(arrest_made = mean(arrest_made),
+            citation_issued = mean(citation_issued),
+            warning_issued = mean(warning_issued),
+            frisk_performed = mean(frisk_performed),
+            search_conducted = mean(search_conducted),
+            search_person = mean(search_person),
+            search_vehicle = mean(search_vehicle)) |> 
+  ggparcoord(columns = 2:8, groupColumn = "precinct") +
+  theme_bw(13) + 
+  ggtitle("Stop Outcomes by Race and Gender") +
+  theme(axis.text.x = element_text(angle = 25, vjust = 1, hjust=1))
+```
+
+
+
+
+
