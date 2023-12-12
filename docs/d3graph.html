@@ -137,7 +137,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context"><span class="header-section-number">4.1</span> Context</a></li>
+  <li><a href="#interactive-barplot" id="toc-interactive-barplot" class="nav-link" data-scroll-target="#interactive-barplot"><span class="header-section-number">4.2</span> Interactive barplot</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">4.3</span> Interpretation</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/edit/main/d3graph.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -159,18 +167,31 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<style>
-  * {
-    font-family: sans-serif;
-  }
-</style>
-<div id="plot">
+<section id="context" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="context"><span class="header-section-number">4.1</span> Context</h2>
+<p>Sometimes, cops decide to perform searches on drivers to ensure that the latter do not put public safety at risk in any way. Indeed, there might be a correlation between reckless driving and drug consumption, alcohol consumption and gun possession… We wanted to see in what type of situation a cop would think it is necessary to perform a search on a driver.</p>
+</section>
+<section id="interactive-barplot" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="interactive-barplot"><span class="header-section-number">4.2</span> Interactive barplot</h2>
+<script src="https://d3js.org/d3.v4.js"></script>
+<h4 style="text-align: center; margin-left: 15%" class="anchored">
+Number of stops per violation type
+</h4>
+<div id="plot" style="width: 960px">
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<p style="text-align: center; font-size: 14px; margin-left: 5%">
+Type of violation
+</p>
 <script src="scripts/myscript.js"></script>
+<p>We have plotted a bar chart that displays the count for each type of violation. It is possible to check the percentage of searched drivers by simply hovering the mouse over the different bars.</p>
+</section>
+<section id="interpretation" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">4.3</span> Interpretation</h2>
+<p>We notice that the type of violation that triggers the highest percentage of search is “investigative_stop” with 12.3%. This seems coherent with the nature of the type of stop. Furthermore, child_restraint and seatbelt_violation come next with respectively 4.7% and 4.3%. This might be surprising as these types of violation might not seem too severe.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -426,7 +447,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/edit/main/d3graph.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/YeriAddict/NashvillePolicing.git/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

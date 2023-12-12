@@ -54,5 +54,26 @@
     "title": "3  Results",
     "section": "3.3 Geographic Elements",
     "text": "3.3 Geographic Elements\n\n\nCode\nnashville |&gt; \n  filter(precinct %in% as.character(1:8)) |&gt; \n  select(precinct, reason_for_stop) |&gt; \n  rename(\"Reason for Stop\" = reason_for_stop) |&gt; \n  drop_na() |&gt; \n  ggplot(aes(x = precinct, fill = `Reason for Stop`)) + \n  geom_bar(position='fill') + \n  labs(x = \"Precinct\", y = \"Proportion\") + \n  ggtitle(\"Reasons for Stop Across Precincts\") + \n  scale_fill_manual(values = c(\"#66c2a5\", \"#fc8d62\", \"#82A2CA\", \"#f99aa4\", \n                               \"#ffd920\", \"#aec57b\", \"#e19c5a\", \"#ad8db3\"),\n                    name = \"Reason for Stop\") + \n  theme_bw(13)\n\n\n\n\n\n\n\nCode\nnashville |&gt;\n  filter(precinct %in% as.character(1:8)) |&gt; \n  mutate(Hour = hour(time)) |&gt; \n  group_by(Hour, precinct) |&gt; \n  summarise(count = n()) |&gt; \n  ggplot(aes(x = Hour, y = count, color = precinct)) + \n  geom_point(size = 0.5) +\n  geom_line() +\n  theme_bw(13) +\n  scale_x_discrete(limits=0:23) + \n  labs(x = \"Hour\", y = \"Stop Count\") +\n  ggtitle(\"Stop Count by Hour of the Day\") \n\n\n\n\n\n\n\nCode\nnashville |&gt; \n  filter(precinct %in% as.character(1:8)) |&gt; \n   mutate(subject_race = ifelse(subject_race %in% \n        c(\"asian/pacific islander\", \"unknown\", \"other\", \"hispanic\"), \"other\", \n        as.character(subject_race))) |&gt; \n  select(precinct, subject_race) |&gt; \n  drop_na() |&gt; \n  ggplot(aes(x = precinct, fill = subject_race)) + \n  geom_bar(position='fill') + \n  labs(x = \"Precinct\", y = \"Proportion\") + \n  ggtitle(\"Reasons for Stop Across Precincts\") + \n  scale_fill_manual(values = c(\"#aec57b\", \"#ad8db3\", \"#82A2CA\"),\n                    name = \"Reason for Stop\") + \n  theme_bw(13)\n\n\n\n\n\n\n\nCode\nnashville |&gt; \n  filter(precinct %in% as.character(1:8)) |&gt; \n  select(precinct, arrest_made, citation_issued, \n         warning_issued, frisk_performed, search_conducted, \n         search_person, search_vehicle) |&gt; \n  drop_na() |&gt; \n  group_by(precinct) |&gt; \n  summarise(arrest_made = mean(arrest_made),\n            citation_issued = mean(citation_issued),\n            warning_issued = mean(warning_issued),\n            frisk_performed = mean(frisk_performed),\n            search_conducted = mean(search_conducted),\n            search_person = mean(search_person),\n            search_vehicle = mean(search_vehicle)) |&gt; \n  ggparcoord(columns = 2:8, groupColumn = \"precinct\") +\n  theme_bw(13) + \n  ggtitle(\"Stop Outcomes by Race and Gender\") +\n  theme(axis.text.x = element_text(angle = 25, vjust = 1, hjust=1))"
+  },
+  {
+    "objectID": "d3graph.html#context",
+    "href": "d3graph.html#context",
+    "title": "4  Interactive graph",
+    "section": "4.1 Context",
+    "text": "4.1 Context\nSometimes, cops decide to perform searches on drivers to ensure that the latter do not put public safety at risk in any way. Indeed, there might be a correlation between reckless driving and drug consumption, alcohol consumption and gun possession… We wanted to see in what type of situation a cop would think it is necessary to perform a search on a driver."
+  },
+  {
+    "objectID": "d3graph.html#interactive-barplot",
+    "href": "d3graph.html#interactive-barplot",
+    "title": "4  Interactive graph",
+    "section": "4.2 Interactive barplot",
+    "text": "4.2 Interactive barplot\n\n\nNumber of stops per violation type\n\n\n\n\n\nType of violation\n\n\nWe have plotted a bar chart that displays the count for each type of violation. It is possible to check the percentage of searched drivers by simply hovering the mouse over the different bars."
+  },
+  {
+    "objectID": "d3graph.html#interpretation",
+    "href": "d3graph.html#interpretation",
+    "title": "4  Interactive graph",
+    "section": "4.3 Interpretation",
+    "text": "4.3 Interpretation\nWe notice that the type of violation that triggers the highest percentage of search is “investigative_stop” with 12.3%. This seems coherent with the nature of the type of stop. Furthermore, child_restraint and seatbelt_violation come next with respectively 4.7% and 4.3%. This might be surprising as these types of violation might not seem too severe."
   }
 ]
