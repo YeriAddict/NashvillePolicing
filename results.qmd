@@ -6,7 +6,6 @@ library(lubridate)
 library(GGally)
 library(vcd)
 library(gridExtra)
-library(ggalluvial)
 
 load('Datasets/nashville_2014.RData')
 
