@@ -1,13 +1,20 @@
 # Interactive graph
 
-<style>
-  * {
-    font-family: sans-serif;
-  }
-</style> 
+## Context
 
-<div id="plot">
-</div>
+Sometimes, cops decide to perform searches on drivers to ensure that the latter do not put public safety at risk in any way. Indeed, there might be a correlation between reckless driving and drug consumption, alcohol consumption and gun possession... We wanted to see in what type of situation a cop would think it is necessary to perform a search on a driver.
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+## Interactive barplot
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<h4 style="text-align: center; margin-left: 15%">Number of stops per violation type</h1>
+<div id="plot" style="width: 960px"></div>
+<p style="text-align: center; font-size: 14px; margin-left: 5%">Type of violation</p>
 <script src="scripts/myscript.js"></script>
+
+We have plotted a bar chart that displays the count for each type of violation. It is possible to check the percentage of searched drivers by simply hovering the mouse over the different bars.
+
+## Interpretation
+
+We notice that the type of violation that triggers the highest percentage of search is "investigative_stop" with 12.3%. This seems coherent with the nature of the type of stop. Furthermore, child_restraint and seatbelt_violation come next with respectively 4.7% and 4.3%. This might be surprising as these types of violation might not seem too severe.
