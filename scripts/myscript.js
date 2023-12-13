@@ -13,7 +13,7 @@ var svg = d3.select("#plot")
             "translate(" + margin.left + "," + margin.top + ")");
 
 // Handle the data
-d3.csv("https://raw.githubusercontent.com/YeriAddict/NashvillePolicing/main/nashville_drivers_searched.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/YeriAddict/NashvillePolicing/main/Datasets/nashville_drivers_searched.csv", function(data) {
 
     // List of violation types
     var groups = d3.map(data, function(d){return(d.group)}).keys()

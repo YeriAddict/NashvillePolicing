@@ -7,9 +7,9 @@ Additionally, females are less stopped compared to males, and it seems that cops
 Finally, some precincts seem to be more targeted depending on the time of day.
 All in all, this dataset showed us some patterns to see which category is more stopped than the others.
 
-Does it necessarily mean that Asians are not the worst drivers and males are not reckless?
+Does it necessarily mean that Asians are not the worst drivers and males are more reckless?
 It does not constitute strong enough evidence to say so.
-It could simply be that the Black population is more important than other minorities or that it is part of the "local culture" for men to drive more than women in Nashville.
+It could simply be that there are more Black drivers than other minorities or that it is part of the "local culture" for men to drive more than women in Nashville.
 It could also be that the concentration of cops in a certain precinct is higher during a certain period of the day which would explain why more stops are triggered in some of them.
 
 Therefore, determining whether these factual figures are resulting from biased or unbiased judgmental decisions by the cops is complicated.
