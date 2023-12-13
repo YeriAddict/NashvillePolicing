@@ -217,9 +217,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(search_basis, contraband_weapons, contraband_found, notes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>In this section, our analysis is restricted to Nashville traffic stop data in 2014.</p>
 <section id="temporal-aspects" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="temporal-aspects"><span class="header-section-number">3.1</span> Temporal Aspects</h2>
-<p>The first step of our exploratory data analysis involves seeing how the number of traffic stops evolved throughout 2014. Since traffic, and therefore driving habits, varies heavily by seasonal factors as well as daily habits, we plot a line graph segmented by day of the week. We see that there are clearly fewer traffic stops occurring on the weekend, which is likely due to the lack of rush hour traffic and its associated stress. There are three outliers to this trend, indicated by the very few traffic stops occuring on Thanksgiving, Christmas Eve, and Christmas Day.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>For completeness we also included the breakdown by hour of day, which verifies our intuition that there are fewer stops during the early morning hours and a spike in during rush hours from 9-10AM and 4-5PM.</p>
+<p>The first step of our exploratory data analysis involves seeing how the number of traffic stops evolved throughout 2014. Since traffic, and therefore driving habits, varies heavily by seasonal factors as well as daily habits, we plot a line graph segmented by day of the week. We see that there are clearly fewer traffic stops occurring on the weekend, which makes sense since there are fewer cars on the road then. There is also no rush hour traffic and its associated stress. There are three outliers to this trend, indicated by the very few traffic stops occuring on Thanksgiving, Christmas Eve, and Christmas Day.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -259,9 +259,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>We also include the breakdown by hour of day, which verifies our intuition that there are fewer stops during the early morning hours and a spike in stops during rush hours from 9-10AM and 4-5PM. Note that there is also a spike in stops during lunch hour on weekdays (12-1PM) and dinner hour on Fridays only (8-9PM).</p>
 </section>
 <section id="demographic-data" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="demographic-data"><span class="header-section-number">3.2</span> Demographic Data</h2>
+<p>One of our main areas of interest is the demographic features of the people stopped.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -283,6 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Now we shift the analysis from the number of stops to the type of violation and its outcome. A primary area of interest is how demographic data is linked to these variables. Above is a stacked bar chart comparing the type of violations between genders. The global percentage of female violations is 41.2%, indicated by the vertical black line. Based on this, we see that women are overrepresented in the child restraint category, which deals with proper safety seats/infant carriers for children. Men are overrepresented in seatbelt violations, parking violations, and investigative stops. The remaining categories are very close to the global average.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -332,6 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>The boxplots above show how age varies between different outcomes, including warnings, arrests, and searches. We see that overall the distrution of people is younger if there was an arrest made or the driver or car was searched. However, if only a warning was issued, the person is likely to be older. This implies that younger people receive harsher treatment at traffic stops, while people who receive a warning are older.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -365,6 +369,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>We wish to see a breakdown of all of the outcomes by race and gender, which is shown in the parallel coordinates plot above. (Note that the colors are paired by race.) From the graph, it is evident that men of color are the most likely to be frisked or searched. Hispanic and Black men are the top group in 5 out of the 7 outcomes, while Asian/Pacific Islander women are at the bottom for these outomes. Men are almost always ranked above their female conterparts, except when a citation or warning is issued. Additionally, we see a trade-off between citations and warnings, where low citation rates correspond to high warning rates and vice versa. Intuitively this makes sense, since warnings are a laxer outcome compared to a formal citation.</p>
+<p>Note that we kept all of the original race categories from the data for this plot. Since there are very few observations in the Hispanic, AAPI, other, and unknown groups, moving forward we will group the races according to White/Black/Other.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -409,9 +415,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>After we have considered race, age, and gender separately, a mosaic plot can help us visualize all of these variables simultaneously. Here the response variable is if the driver was searched or not. Between the two plots, it is clear that women are searched less frequently than men across all age and race categories. In general, older people are searched with a smaller proportion, and Black individuals are searched with the greatest proportion in every subcategory.</p>
 </section>
 <section id="geographic-elements" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="geographic-elements"><span class="header-section-number">3.3</span> Geographic Elements</h2>
+<p>Nashville is broken up into eight precincts. We will analyze the variation between precincts in this section.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -433,6 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In the stacked bar chart above, we see different distributions of violations across precincts. Notably, precinct 6 has the greatest proportion of moving traffic violations, and precinct 3 has the smallest proportion of vehicle equipment violations. Precinct 7 has the biggest proportion of seatbelt violations. These differences may be due to the factors such as the layout of the city, the amount of traffic, and how urban the precincts are.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -447,12 +456,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">13</span>) <span class="sc">+</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">23</span>) <span class="sc">+</span> </span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Hour"</span>, <span class="at">y =</span> <span class="st">"Stop Count"</span>) <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Stop Count by Hour of the Day"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Stop Count by Hour of the Day by Precinct"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>The differences in precinct are evident by looking at the number of stops by hour segmented by precinct. Clearly, precinct 5 has the most stops during daytime hours (7AM-4PM) but fewer stops for the rest of the day. Conversely, precinct 8 has a medium number of stops during the daytime but the most stops during odd hours such as around midnight. These trends likely reflect both the patrolling patterns of police and the traffic waves in certain areas of the city.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -466,15 +476,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> precinct, <span class="at">fill =</span> subject_race)) <span class="sc">+</span> </span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">'fill'</span>) <span class="sc">+</span> </span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Precinct"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>) <span class="sc">+</span> </span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Reasons for Stop Across Precincts"</span>) <span class="sc">+</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Race Comparisons Across Precincts"</span>) <span class="sc">+</span> </span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#aec57b"</span>, <span class="st">"#ad8db3"</span>, <span class="st">"#82A2CA"</span>),</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">"Reason for Stop"</span>) <span class="sc">+</span> </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">"Race"</span>) <span class="sc">+</span> </span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>From the stacked barplot above, we see that the distribution of races also varies by precinct. Precinct 6 has the highest proportion of Black individuals stopped, while precinct 1 has the greatest proportion of White drivers stopped. Visualizing these differences can show the bigger picture of the populations of neighborhoods in Nashville.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -494,13 +505,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">search_vehicle =</span> <span class="fu">mean</span>(search_vehicle)) <span class="sc">|&gt;</span> </span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggparcoord</span>(<span class="at">columns =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">groupColumn =</span> <span class="st">"precinct"</span>) <span class="sc">+</span></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">13</span>) <span class="sc">+</span> </span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Stop Outcomes by Race and Gender"</span>) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Stop Outcomes by Precinct"</span>) <span class="sc">+</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">25</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Finally, we compare the breakdown of outcomes by precinct. We see that precinct 7 is where individuals are the most likely to be searched. Precinct 4 has the lowest rates of searches and warnings but the highest likelihood of a citation issued. This plot also verifies the tradeoff between citations and warnings that was shown in the parallel coordinates plot by race. Precincts with a high rate of citations also have a low rate of warnings, and the converse holds. To see this, note the trends exhibited by precincts 2 and 4.</p>
 
 
 </section>

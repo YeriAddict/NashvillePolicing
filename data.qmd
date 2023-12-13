@@ -132,4 +132,6 @@ To further analyze trends in missing values, we faceted the percent of missing v
 
 With the fact that there are over three million rows in mind, we decide to subset our data to 2014 only for a more manageable size. Our subsetted data has 413,114 rows. 
 
+As we move forward with our analysis, we want to keep as much data as possible. Furthermore, most of the columns have zero or only a handful missing values. For these reasons we did not remove incomplete rows with NA's; instead we will drop missing observations if needed and only for the columns analyzed in the current plot.
+
 
