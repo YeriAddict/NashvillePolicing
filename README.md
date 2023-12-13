@@ -40,6 +40,9 @@ We chose to work on the dataset for Nashville, Tennessee:
 
 * [tidyverse](https://www.tidyverse.org/)
 * [lubridate](https://lubridate.tidyverse.org/)
+* [GGally](https://cran.r-project.org/web/packages/GGally/index.html)
+* [vcd](https://cran.r-project.org/web/packages/vcd/index.html)
+* [gridExtra](https://cran.r-project.org/web/packages/gridExtra/index.html)
 
 ### Rendering the book in RStudio
 
@@ -50,6 +53,7 @@ We chose to work on the dataset for Nashville, Tennessee:
 
 ## Authors
 
+Group 15
 - jcn2148
 - dsl2179
 

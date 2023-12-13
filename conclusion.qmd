@@ -1,6 +1,16 @@
 # Conclusion
 
-This dataset had multiple interesting features. It was possible to plot graphs to find some trends by race, age, and sex to determine whether or not a certain category is more subject to a stop by cops in Nashville, Tennessee.
-For example, it is clearly observable that blacks are usually more likely to be arrested or searched compared to other races. Additionally, females are less stopped compared to males, and it seems that cops are more lenient towards the elderly, who are more warned than arrested than their younger peers.
-However, determining whether these unbiased facts are resulting from objective judgmental decisions by the cops is another story.
-To go further, it would be interesting to conduct a demographical and social analysis of the Nashville population to conclude whether young black males or people from district 6 are usually worse drivers or if there are simply more cops targeting this category of individuals from a biased viewpoint.
+This dataset had multiple interesting features.
+It was possible to plot graphs to find some trends by race, age, sex and others to determine whether or not a certain category is more subject to a stop by cops in Nashville, Tennessee.
+For example, it is clearly observable that Blacks are usually more likely to be arrested or searched compared to other races.
+Additionally, females are less stopped compared to males, and it seems that cops are more lenient towards the elderly, who are more warned than arrested than their younger peers.
+Finally, some precincts seem to be more targeted depending on the time of day.
+All in all, this dataset showed us some patterns to see which category is more stopped than the others.
+
+Does it necessarily mean that Asians are not the worst drivers and males are not reckless?
+It does not constitute strong enough evidence to say so.
+It could simply be that the Black population is more important than other minorities or that it is part of the "local culture" for men to drive more than women in Nashville.
+It could also be that the concentration of cops in a certain precinct is higher during a certain period of the day which would explain why more stops are triggered in some of them.
+
+Therefore, determining whether these factual figures are resulting from biased or unbiased judgmental decisions by the cops is complicated.
+To make such causal conclusions it would be necessary to conduct an experiment (which is very difficult to do) on the Nashville population.

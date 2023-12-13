@@ -12,9 +12,17 @@ Sometimes, cops decide to perform searches on drivers to ensure that the latter 
 <div id="plot" style="width: 960px"></div>
 <p style="text-align: center; font-size: 14px; margin-left: 5%">Type of violation</p>
 <script src="scripts/myscript.js"></script>
+Source: <a href="https://d3-graph-gallery.com/graph/barplot_stacked_hover.html">https://d3-graph-gallery.com/graph/barplot_stacked_hover.html</a>
 
-We have plotted a bar chart that displays the count for each type of violation. It is possible to check the percentage of searched drivers by simply hovering the mouse over the different bars. Indeed, a tooltip will appear whenever the mouse is on top of a bar. It also displays the total count for a type of violation.
+We have plotted a bar chart that displays the count for each type of violation.
+It is possible to check the percentage of searched drivers by simply hovering the mouse over the different bars.
+Indeed, a tooltip will appear whenever the mouse is on top of a bar. It also displays the total count for a type of violation.
 
 ## Interpretation
 
-We notice that the type of violation that triggers the highest percentage of searches is "investigative_stop" with 12.3%. This seems coherent with the nature of this type of stop. Furthermore, child_restraint and seatbelt_violation come next with respectively 4.7% and 4.3%. This might be surprising as these violations might not seem too severe compared to safety_violation for instance. As a result, it may be difficult to understand how cops judge whether or not certain drivers are worthy of being searched or not. One hypothesis would have been to think that a safety_violation stop would trigger a higher percentage of searches but it does not seem to be the case.
+We notice that the type of violation that triggers the highest percentage of searches is "investigative_stop" with 12.3%.
+This seems coherent with the nature of this type of stop.
+Furthermore, child_restraint and seatbelt_violation come next with respectively 4.7% and 4.3%.
+This might be surprising as these violations might not seem too severe compared to safety_violation for instance.
+As a result, it may be difficult to understand how cops judge whether or not certain drivers are worthy of being searched or not.
+One hypothesis would have been to think that a safety_violation stop would trigger a higher percentage of searches but it does not seem to be the case.
