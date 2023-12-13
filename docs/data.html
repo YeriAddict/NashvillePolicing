@@ -558,6 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To further analyze trends in missing values, we faceted the percent of missing values by year for a few of the variables with a most number of missing values after excluding the four variables discussed above. We see that in 2017-2019, there is no data for raw_written_warning_issued, and from 2010-2011 the column raw_misd_state_citation_issued is mostly empty. This may be due to changes in notation over time.</p>
 <p>With the fact that there are over three million rows in mind, we decide to subset our data to 2014 only for a more manageable size. Our subsetted data has 413,114 rows.</p>
+<p>As we move forward with our analysis, we want to keep as much data as possible. Furthermore, most of the columns have zero or only a handful missing values. For these reasons we did not remove incomplete rows with NA’s; instead we will drop missing observations if needed and only for the columns analyzed in the current plot.</p>
 
 
 </section>
